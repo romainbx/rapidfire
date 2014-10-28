@@ -1,18 +1,31 @@
 <tr id= "question_group_<%= question_group.id %>">
-  <td>
-    <% if can_administer? %>
-      <%= link_to question_group.name, question_group_questions_path(question_group) %>
-    <% else %>
-      <%= question_group.name %>
-    <% end %>
-  </td>
-  <td>
-    <ul class="horizontal-list">
-      <li><%= link_to "Answer Questions", new_question_group_answer_group_path(question_group) %></li>
-      <% if can_administer? %>
-        <li><%= link_to "Results", [:results, question_group] %></li>
-        <li><%= link_to "Delete", [question_group], method: :delete %></li>
+  <td><%= question_group.name %></td>
+  <td><%= question_group.type %></td>
+  <td><%= question_group.questions.count %></td>
+  <td><%= question_group.user.email if question_group.user %></td>
+  <td class="actions">
+      <%= link_to new_question_group_answer_group_path(question_group), :class => "btn btn-xs btn-primary", :title => t('fill_form'), :"data-toggle"=>"tooltip" do %>
+        <i class="fa fa-check-square-o"></i>
       <% end %>
-    </ul>
+      <%= link_to new_question_group_answer_group_path(question_group, :format => :pdf), :class => "btn btn-xs btn-primary", :title => t('export_pdf'), :"data-toggle"=>"tooltip" do %>
+        <i class="fa fa-file-pdf-o"></i>
+      <% end %>
+      <% if can_administer? %>
+        <%= link_to edit_question_group_path(question_group), :class => "btn btn-xs btn-primary", :title => t('edit'), :"data-toggle"=>"tooltip" do %>
+          <i class="fa fa-edit"></i>
+        <% end %>
+        <%= link_to question_group_questions_path(question_group), :class => "btn btn-xs btn-primary", :title => t('edit_questions'), :"data-toggle"=>"tooltip" do %>
+          <i class="fa fa-question-circle"></i>
+        <% end %>
+        <%= link_to [:results, question_group], :class => "btn btn-xs btn-primary", :title => t('results'), :"data-toggle"=>"tooltip" do %>
+          <i class="fa fa-graduation-cap"></i>
+        <% end %>
+        <%= link_to duplicate_question_group_path(question_group), :class => "btn btn-xs btn-primary", :title => t('duplicate'), :"data-toggle"=>"tooltip" do %>
+          <i class="fa fa-copy"></i>
+        <% end %>
+        <%= link_to [question_group], method: :delete, data: { confirm: t("delete_confirmation") }, :class => "btn btn-xs btn-danger", :title => t('delete'), :"data-toggle"=>"tooltip" do %>
+          <i class="fa fa-trash-o"></i>
+        <% end %>
+      <% end %>
   </td>
 </tr>

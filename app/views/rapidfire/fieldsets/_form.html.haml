@@ -1,0 +1,27 @@
+%h1
+  Fieldset
+
+%hr
+
+= form_for [@question_group, fieldset], :html => {:class => "form-horizontal"} do |f|
+  - unless fieldset.errors.empty?
+    %ul
+      - fieldset.errors.full_messages.each do |message|
+        %li= message
+  
+  .row
+    .col-xs-12
+      .form-group
+        = f.label :title, :class => "form-group-title"
+        = f.text_field :title, :class => "form-control"
+      .form-group
+        = f.label :title_cn, :class => "form-group-title"
+        = f.text_field :title_cn, :class => "form-control"
+      .form-group
+        = f.label :description, :class => "form-group-title"
+        = f.text_area :description, :class => "form-control"
+      .form-group
+        = f.label :position, :class => "form-group-title"
+        = f.text_field :position, :class => "form-control"
+  .form-group
+    = f.submit t("submit"), :class => "btn btn-primary"

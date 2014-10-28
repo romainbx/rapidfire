@@ -1,7 +1,5 @@
 <%- if answer.errors.any? %>
-  <ul>
-    <%- answer.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
+    <%- answer.errors.messages.each do |key, message| %>
+      <small style="color:#e74c3c; margin-top:5px;display: inline-block;"><%= message[0] %></small>
     <% end %>
-  </ul>
 <% end %>

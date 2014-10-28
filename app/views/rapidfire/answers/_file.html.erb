@@ -1,0 +1,17 @@
+<% if !answer.documents.any? %>
+  <% answer.documents.build %>
+<% end %>
+<div class="col-xs-<%= answer.question.col_size %>"><div class="form-group">
+  <%= f.label :answer_text, answer.question.question_text, :class => "form-group-title" %>
+  <%= f.fields_for :documents do |document| %>
+    <% if document.object.new_record? %>
+      <%= document.file_field :asset, :class => "form-control" %>
+    <% else %>
+      <div>
+        <%= document.object.asset_file_name %>
+      </div>
+    <% end %>
+  <% end %>
+  <%= link_to_add_fields t('add_file'), f, :documents %>
+  <%= render partial: "rapidfire/answers/errors", locals: {answer: answer} %>
+</div></div>

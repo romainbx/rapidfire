@@ -1,5 +1,5 @@
-<h3><%= question_group.new_record? ? "New Group" : "Edit Group" %></h3>
-
+<h1><%= question_group.new_record? ? "Nouveau formulaire" : "Edition du formulaire" %></h1>
+<hr>
 <%= form_for question_group do |f| %>
   <%- if question_group.errors.any? %>
     <ul>
@@ -8,8 +8,23 @@
       <% end %>
     </ul>
   <% end %>
+  <div class="form-group">
+    <%= f.label t('name'), :class => "form-group-title" %>
+    <%= f.text_field :name, :class => "form-control" %>
+  </div>
 
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <%= f.submit %>
+  <div class="form-group">
+    <%= f.label t('header'), :class => "form-group-title" %>
+    <%= f.text_area :header, :class => "form-control tinymce" %>
+  </div>
+  <%= tinymce %>
+
+  <div class="form-group">
+    <%= f.label t('type'), :class => "form-group-title" %>
+    <br>
+    <%= f.select :type_cd, enum_option_pairs(Rapidfire::QuestionGroup, :type, true) %>
+  </div>
+  <div class="form-group">
+    <%= f.submit t("submit"), :class => "btn btn-primary" %>
+  </div>
 <% end %>

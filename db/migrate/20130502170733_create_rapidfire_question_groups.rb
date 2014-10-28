@@ -4,5 +4,7 @@ class CreateRapidfireQuestionGroups < ActiveRecord::Migration
       t.string  :name
       t.timestamps
     end
+    add_column :rapidfire_question_groups, :user_id, :integer
+    add_column :rapidfire_question_groups, :type_cd, :integer, :default => 0, :null => false
   end
 end

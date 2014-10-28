@@ -1,4 +1,9 @@
 <%= render partial: "rapidfire/answers/errors", locals: {answer: answer} %>
-
-<%= f.label :answer_text, answer.question.question_text %>
-<%= f.text_field :answer_text %>
+<div class="col-xs-<%= answer.question.col_size %>"><div class="form-group">
+<%= f.label :answer_text, "#{answer.question.question_text} (JJ-MM-YYYY)", :class => "form-group-title" %>
+  <% if disabled %>
+    <div class="answer_text"><%= answer.answer_text %></div>
+  <% else %>
+    <%= f.text_field :answer_text, :class => "date form-control", :disabled => disabled %>
+  <% end %>
+</div></div>

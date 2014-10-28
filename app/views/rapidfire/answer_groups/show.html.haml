@@ -1,0 +1,9 @@
+%h1.page-title
+  = @question_group.name
+%hr
+= form_for([@question_group, @answer_group], :html => { :multipart => true }) do |f|
+  - @answer_group_builder.answers.each do |a|
+    - answer = @answer_group.answers.detect{|answer| answer.question_id == a.question_id}
+    - answer = answer ? answer : a
+    = f.fields_for("#{answer.question.id}", answer) do |answer_form|
+      = render_answer_form_helper(answer, answer_form, true)

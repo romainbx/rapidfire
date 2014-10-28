@@ -1,0 +1,96 @@
+%h1
+  Question
+
+%hr
+
+= form_for [@question_group, question], :html => {:class => "form-horizontal"} do |f|
+  - unless question.errors.empty?
+    %ul
+      - question.errors.full_messages.each do |message|
+        %li= message
+  
+  .row
+    .col-xs-12
+      .form-group
+        = f.label :type, :class => "form-group-title"
+        %br
+        = f.select :type, ::Rapidfire::QuestionForm::QUESTION_TYPES, {}, id: "question_type"
+
+      .form-group
+        = f.label :question_text, :class => "form-group-title"
+        = f.text_field :question_text, :class => "form-control"
+
+      .form-group
+        = f.label :question_text_cn, :class => "form-group-title"
+        = f.text_field :question_text_cn, :class => "form-control"
+
+      .form-group
+        = f.label :answer_options, :class => "form-group-title"
+        = f.text_area :answer_options, rows: 4, :class => "text optional input-xlarge", :class => "form-control"
+      
+      - if @question_group.examen?
+        .form-group
+          = f.label :right_answers, :class => "form-group-title"
+          = f.text_area :right_answers, :class => "form-control"
+        .form-group
+          = f.label :points, :class => "form-group-title"
+          = f.text_field :points, :class => "form-control"
+
+      .form-group
+        = f.label :question_condition, :class => "form-group-title"
+        %br
+        = f.collection_select(:question_condition_id, @question_group.questions, :id, :question_text, {:selected => question.question_condition_id, include_blank: "-"}, {})
+
+      .form-group
+        = f.label :question_condition_answers, :class => "form-group-title"
+        = f.text_area :question_condition_answers, :class => "form-control"
+
+      .form-group
+        = f.label :position, :class => "form-group-title"
+        = f.text_field :position, :class => "form-control"
+
+      .form-group
+        = f.label :col_size, :class => "form-group-title"
+        %br
+        = f.select :col_size, (1..12), :selected => question.col_size
+
+      .form-group
+        = f.label t('clear'), :class => "form-group-title"
+        %br
+        = f.select :clear_cd, enum_option_pairs(Rapidfire::Question, :clear, true)
+
+      .form-group
+        .checkbox
+          %label
+            = f.check_box :answer_presence
+            Obligatoire
+
+      .form-group
+        .checkbox
+          %label
+            = f.check_box :show_in_pdf
+            Afficher dans le PDF
+
+    %div{:style => "display:none;"}
+      %h4
+        Other options
+      %hr
+
+      .form-group
+        = f.label :answer_minimum_length, :class => "form-group-title"
+        = f.text_field :answer_minimum_length, :class => "form-control"
+
+      .form-group
+        = f.label :answer_maximum_length, :class => "form-group-title"
+        = f.text_field :answer_maximum_length, :class => "form-control"
+
+      .form-group
+        = f.label :answer_greater_than_or_equal_to, :class => "form-group-title"
+        = f.text_field :answer_greater_than_or_equal_to, :class => "form-control"
+
+      .form-group
+        = f.label :answer_less_than_or_equal_to, :class => "form-group-title"
+        = f.text_field :answer_less_than_or_equal_to, :class => "form-control"
+
+  .form-group
+    = f.submit t("submit"), :class => "btn btn-primary"

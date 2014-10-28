@@ -1,0 +1,28 @@
+%tr{:id=>"question_#{question.id}"}
+  %td
+    .handle-sort.btn-default.btn.btn-xs
+      %i.fa.fa-arrows
+  %td{:style => "padding-left:#{2*conditional_question_ids(question).split(" ").size}%"}
+    - conditional_question(question).reverse.each do |q|
+      - if q.question_condition
+        - title = q.question_condition.question_text + " " + q.question_condition_answers
+        %i.fa.fa-arrow-circle-right{:"data-toggle"=>"tooltip", :title => title, :style => "cursor:pointer;"}
+    = question.question_text
+  %td= t(question.type.to_s.split("::").last.downcase)
+  %td= question.rules[:presence]
+  %td= question.show_in_pdf
+  - if question.question_group.examen? 
+    %td
+      = question.points.prettify if question.points
+  %td= question.col_size
+  %td= question.clear
+  %td.actions
+    = link_to [:edit, question.question_group, question], :class => "btn btn-primary btn-xs", :title => t('edit'), :"data-toggle"=>"tooltip" do
+      %i.fa.fa-edit
+    - if Rapidfire::Answer.where(:question_id => question.id).count > 0
+      = link_to [question.question_group, question], :method => :delete, data: { confirm: t("delete_confirmation_already_answers") }, :class => "btn btn-danger btn-xs", :title => t('delete'), :"data-toggle"=>"tooltip" do
+        %i.fa.fa-trash-o
+    - else
+      = link_to [question.question_group, question], :method => :delete, data: { confirm: t("delete_confirmation") }, :class => "btn btn-danger btn-xs", :title => t('delete'), :"data-toggle"=>"tooltip" do
+        %i.fa.fa-trash-o
+    %input{:type => "hidden", :id => "question_#{question.id}_position", :name => "positions[questions][#{question.id}]", :value => question.position}

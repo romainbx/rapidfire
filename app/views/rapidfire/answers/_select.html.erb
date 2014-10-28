@@ -1,4 +1,16 @@
-<%= render partial: "rapidfire/answers/errors", locals: {answer: answer} %>
-
-<%= f.label :answer_text, answer.question.question_text %>
-<%= f.select :answer_text, answer.question.options, include_blank: true %>
+<% if params[:format] == "pdf" %>
+  <%= render :partial => "rapidfire/answers/radio.html.erb", locals: {answer: answer, :f => f} %>
+<% else %>
+  <%= render partial: "rapidfire/answers/errors", locals: {answer: answer} %>
+  <div class="col-xs-<%= answer.question.col_size %>">
+    <div class="form-group">
+      <%= f.label :answer_text, answer.question.question_text, :class => "form-group-title" %>
+      <br>
+      <% if disabled %>
+        <div class="answer_text"><%= answer.answer_text %></div>
+      <% else %>
+        <%= f.select :answer_text, answer.question.options, {include_blank: true}, {:'data-question' => answer.question_id} %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

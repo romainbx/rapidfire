@@ -1,0 +1,25 @@
+<%= @question_group.header %>
+<hr>
+<%= form_for([@question_group, @answer_group], :html => { :multipart => true }) do |f| %>
+  <% @answer_group.question_group.elements.each do |element| %>
+    <% if element.class == Rapidfire::Fieldset %>
+      <div class="fieldset col-sm-12">
+        <div class="title"><%= element.title %></div>
+        <% if !element.description.blank? %>
+          <div class="description"><%= simple_format element.description %></div>
+        <% end %>
+      </div>
+    <% else %>
+      <% answer = @answer_group.answers.select{|a| a.question_id == element.id}.first %>
+      <%= f.fields_for("#{answer.question.id}", answer) do |answer_form| %>
+        <div data-question-condition-parents="<%= conditional_question_ids(answer.question) %>" data-question-condition="<%= answer.question.question_condition_id %>" data-answer="<%= answer.question.question_condition_answers %>" style="clear:<%= answer.question.clear %>; display:<%= answer.question.question_condition ? 'none' : 'block' %>">
+          <%= render_answer_form_helper(answer, answer_form) %>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+  
+  <div class="col-sm-12" style="clear:both;">
+    <%= f.submit t("submit"), :class => "btn btn-primary" %>
+  </div>
+<% end %>

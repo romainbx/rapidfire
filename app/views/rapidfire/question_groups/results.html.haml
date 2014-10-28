@@ -1,0 +1,56 @@
+%h1
+  = @question_group.name
+  = link_to [:results, @question_group, :format => :xls], :class => "btn btn-primary", :style => "float:right;" do
+    .fa.fa-file-excel-o{:style=>"margin-right:5px"}
+    Export Excel
+%h6
+  = "Résultats du questionnaire"
+<hr>
+%table.table
+  %tr
+    - @question_group.questions.each do |question|
+      - if question.mandatory?
+        %th
+          = question.question_text
+          - if @question_group.examen? && (question.points && question.points > 0)
+            .small= "[#{question.points.prettify} points]"
+    - if @question_group.examen?
+      %th Total
+    - if can_administer?
+      %th
+  - @answer_groups.each do |answer_group|
+    %tr
+      - total = 0.0
+      - total_user = 0.0
+      - @question_group.questions.each do |question|
+        - answer = answer_group.answers.where(:question => question).first
+        - if answer
+          - if answer.question.type == "Rapidfire::Questions::File"
+            - if question.mandatory?
+              %td
+                - if answer.documents.any?
+                  - answer.documents.each do |doc|
+                    = link_to doc.asset_file_name, doc.asset.url
+
+          - elsif @question_group.examen? && (!answer.question.points.nil? && answer.question.points > 0)
+            - if question.mandatory?
+              %td{:class => "#{answer.right? ? 'alert-success' : 'alert-danger'}"}
+                = answer.answer_text
+            - if answer.right?
+              - total_user += answer.question.points
+            - total += answer.question.points
+          - else
+            - if question.mandatory?
+              %td= answer.answer_text
+        - else
+          %td
+
+      - if @question_group.examen?
+        %td
+          = "#{total_user.prettify}/#{total.prettify}"
+      - if can_administer?
+        %td.actions
+          = link_to question_group_answer_group_path(@question_group, answer_group), :class => "btn btn-primary", :title => "Voir", :"data-toggle"=>"tooltip" do
+            %i.fa.fa-eye
+          = link_to edit_question_group_answer_group_path(@question_group, answer_group), :class => "btn btn-primary", :title => t('edit'), :"data-toggle"=>"tooltip" do
+            %i.fa.fa-edit

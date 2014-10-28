@@ -1,0 +1,43 @@
+fr:
+  questions:
+    new_question: Nouvelle question
+  edit: Modifier
+  delete: Supprimer
+  duplicate: Dupliquer
+  delete_confirmation: Êtes-vous sûr ?
+  delete_confirmation_already_answers: Êtes-vous sûr ? Il y a déjà des réponses à cette question. Elles seront supprimées en même temps que la question. 
+  submit: Valider
+  type: Type
+  name: Nom
+  fill_form: Remplir le questionnaire
+  results: Résultat
+  edit_questions: Ajouter ou modifier des questions
+  export_pdf: Format PDF
+
+  checkbox: Cases à cocher
+  date: Date
+  file: Fichier
+  datetime: Date et heure
+  long: Chiffre long
+  numeric: Chiffre court
+  radio: Boutons radio
+  select: Liste déroulante
+  short: Texte court
+  email: Email
+  clear: Nouvelle ligne
+
+  add_file: Ajouter un fichier
+
+  enums:
+    rapidfire/question:
+      clear:
+        both: Oui
+        none: Non
+
+  activerecord:
+    errors:
+      models:
+        rapidfire/answer:
+          attributes:
+            answer_text:
+              blank: Ce champ est obligatoire

@@ -1,22 +1,22 @@
-<h2>
-  Question Groups
-  <% if can_administer? %>
-    <%= link_to "New Group", new_question_group_path %>
+<% if can_administer? %>
+  <%= link_to new_question_group_path, :class => "btn btn-primary", :style => "float:right;" do %>
+    <i class="fa fa-plus-circle" style="margin-right:5px;"></i>
+    Nouveau questionnaire
   <% end %>
-</h2>
+<% end %>
+<h1>
+  Liste des questionnaires
+</h1>
 <hr/>
 
-<table>
-  <colgroup>
-    <col>
-    <col width="250">
-  </colgroup>
-  <thead>
-    <tr>
-      <th>Question Group</th>
-      <th></th>
-    </tr>
-  </thead>
+<table class="table">
+  <tr>
+    <th>Nom</th>
+    <th>Type</th>
+    <th>Questions</th>
+    <th>Auteur</th>
+    <th width="330"></th>
+  </tr>
   <tbody>
     <%= render partial: "question_group", collection: @question_groups %>
   </tbody>

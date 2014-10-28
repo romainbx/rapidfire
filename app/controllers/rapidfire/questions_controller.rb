@@ -8,11 +8,14 @@ module Rapidfire
 
     def index
       @questions = @question_group.questions
+      @elements = @question_group.elements
       respond_with(@questions)
     end
 
     def new
       @question = QuestionForm.new(:question_group => @question_group)
+      @question.show_in_pdf = true
+      @question.position = @question_group.elements.count
       respond_with(@question)
     end
 

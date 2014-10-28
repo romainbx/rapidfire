@@ -1,11 +1,24 @@
-<h2>Please answer these Questions</h2>
-<hr/>
-
-<%= form_for([@question_group, @answer_group_builder]) do |f| %>
-  <%- @answer_group_builder.answers.each do |answer| %>
-    <%= f.fields_for("#{answer.question.id}", answer) do |answer_form| %>
-      <%= render_answer_form_helper(answer, answer_form) %>
+<%= raw @question_group.header %>
+<hr>
+<%= form_for([@question_group, @answer_group_builder], :html => { :multipart => true }) do |f| %>
+  <% @answer_group_builder.question_group.elements.each do |element| %>
+    <% if element.class == Rapidfire::Fieldset %>
+      <div class="fieldset col-sm-12">
+        <div class="title"><%= element.title %></div>
+        <% if !element.description.blank? %>
+          <div class="description"><%= simple_format element.description %></div>
+        <% end %>
+      </div>
+    <% else %>
+      <% answer = @answer_group_builder.answers.select{|a| a.question_id == element.id}.first %>
+      <%= f.fields_for("#{answer.question.id}", answer) do |answer_form| %>
+        <div data-question-condition-parents="<%= conditional_question_ids(answer.question) %>" data-question-condition="<%= answer.question.question_condition_id %>" data-answer="<%= answer.question.question_condition_answers %>" style="display:<%= answer.question.question_condition ? 'none' : 'block' %>">
+          <%= render_answer_form_helper(answer, answer_form) %>
+        </div>
+      <% end %>
     <% end %>
   <% end %>
-  <%= f.submit "Save" %>
+  <div class="col-sm-12" style="clear:both;">
+    <%= f.submit t("submit"), :class => "btn btn-primary" %>
+  </div>
 <% end %>

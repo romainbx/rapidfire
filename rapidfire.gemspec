@@ -18,6 +18,12 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rails",    ">= 3.2.13"
   s.add_dependency "active_model_serializers", "~> 0.8.1"
+  s.add_dependency "simple_enum", "~> 2.1.1"
+  s.add_dependency "wkhtmltopdf-binary", "~> 0.9.9"
+  s.add_dependency "wicked_pdf", "~> 0.11.0"
+  s.add_dependency "paperclip"
+  s.add_dependency "writeexcel", "~> 1.0.4"
+  s.add_dependency "axlsx"
 
   s.add_development_dependency "sqlite3"
   s.add_development_dependency 'quiet_assets'

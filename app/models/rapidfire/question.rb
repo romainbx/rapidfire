@@ -1,15 +1,22 @@
 module Rapidfire
   class Question < ActiveRecord::Base
     belongs_to :question_group, :inverse_of => :questions
-    has_many   :answers
+    has_many   :answers, :dependent => :destroy
 
     default_scope { order(:position) }
 
     validates :question_group, :question_text, :presence => true
     serialize :validation_rules
 
+    has_attached_file :file
+
+    belongs_to :question_condition, :class_name => Rapidfire::Question
+
+    as_enum :clear, :none => 0, :both => 1
+
     if Rails::VERSION::MAJOR == 3
-      attr_accessible :question_group, :question_text, :validation_rules, :answer_options
+      attr_accessible :question_group, :question_text, :validation_rules, :answer_options, :right_answers, :points, :show_in_pdf, :question_text_cn
+      attr_accessible :question_condition_id, :question_condition_answers, :col_size, :clear_cd
     end
 
     def self.inherited(child)
@@ -24,6 +31,14 @@ module Rapidfire
 
     def rules
       validation_rules || {}
+    end
+
+    def mandatory?
+      if rules[:presence] == "1"
+        true
+      else
+        false
+      end
     end
 
     # answer will delegate its validation to question, and question

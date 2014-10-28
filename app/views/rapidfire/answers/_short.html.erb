@@ -1,4 +1,12 @@
-<%= render partial: "rapidfire/answers/errors", locals: {answer: answer} %>
-
-<%= f.label :answer_text, answer.question.question_text %>
-<%= f.text_field :answer_text %>
+<div class="col-xs-<%= answer.question.col_size %>">
+  <div class="form-group">
+    <%= f.label :answer_text, answer.question.question_text, :class => "form-group-title" %>
+    <%= f.label :answer_text, answer.question.question_text_cn, :class => "form-group-title" if !answer.question.question_text_cn.blank? %>
+    <% if disabled %>
+      <div class="answer_text"><%= answer.answer_text %></div>
+    <% else %>
+      <%= f.text_field :answer_text, :class => "form-control" %>
+    <% end %>
+    <%= render partial: "rapidfire/answers/errors", locals: {answer: answer} %>
+  </div>
+</div>

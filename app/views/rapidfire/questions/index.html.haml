@@ -1,0 +1,50 @@
+%h1
+  = @question_group.name
+%hr
+= link_to new_question_group_question_path(@question_group), :class => "btn btn-primary", :style => "float:right;" do
+  %i.fa.fa-plus-circle{:style => "margin-right:5px;"}
+  = t("questions.new_question")
+= link_to new_question_group_fieldset_path(@question_group), :class => "btn btn-primary", :style => "float:right;" do
+  %i.fa.fa-plus-circle{:style => "margin-right:5px;"}
+  = t("questions.new_fieldset")
+
+%div
+  Type :
+  = @question_group.type
+%div
+  Auteur :
+  = @question_group.user.email
+%div
+  Réponses :
+  = "#{Rapidfire::AnswerGroup.where(:question_group => @question_group).count}"
+- if @question_group.examen?
+  %br
+  Total de points :
+  - total = 0
+  - @questions.each{|q| total+=q.points if q.points}
+  = total.prettify
+%hr
+
+= form_tag update_positions_question_group_path(@question_group), :method => :post do
+  %table.table
+    %tr
+      %th{:style => "width:60px;"}
+      %th Titre
+      %th Type
+      %th Obligatoire
+      %th PDF
+      - if @question_group.examen?
+        %th Points
+      %th Colonnes
+      %th Ligne
+      %th{:style => "width:100px;"}
+    %tbody.sortable
+      - if @elements.any?
+        - @elements.each do |element|
+          - if element.class == Rapidfire::Fieldset
+            = render "rapidfire/fieldsets/fieldset", :fieldset => element
+          - else
+            = render "rapidfire/questions/question", :question => element
+      -#= render partial: "question", collection: @questions
+
+  = submit_tag "Valider les positions", :class => "btn btn-primary"

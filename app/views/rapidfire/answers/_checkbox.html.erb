@@ -1,11 +1,22 @@
 <%= render partial: "rapidfire/answers/errors", locals: {answer: answer} %>
-
-<%= f.label :answer_text, answer.question.question_text %>
-<%= f.fields_for :answer_text do |af| %>
-  <%- answer.question.options.each do |option| %>
-    <%= af.label option do %>
-      <%= af.check_box nil, { id: nil, checked: checkbox_checked?(answer, option) }, option %>
-      <%= option %>
+<div class="col-xs-<%= answer.question.col_size %>">
+  <div class="form-group">
+    <%= f.label :answer_text, answer.question.question_text, :class => "form-group-title" %>
+    <% if params[:format] == "pdf" %><div class="intructions">Plusieurs réponses possibles</div><% end %>
+    
+    <% if disabled %>
+      <div class="answer_text"><%= answer.answer_text %></div>
+    <% else %>
+      <%= f.fields_for :answer_text do |af| %>
+        <%- answer.question.options.each do |option| %>
+          <div class="checkbox">
+            <%= af.label option do %>
+              <%= af.check_box nil, { id: nil, checked: checkbox_checked?(answer, option), :'data-question' => answer.question_id}, option %>
+              <%= option %>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
     <% end %>
-  <% end %>
-<% end %>
+  </div>
+</div>

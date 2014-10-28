@@ -1,9 +1,17 @@
 <%= render partial: "rapidfire/answers/errors", locals: {answer: answer} %>
-
-<%= f.label :answer_text, answer.question.question_text %>
-<%- answer.question.options.each do |option| %>
-  <%= f.label "answer_text_#{option}", option do %>
-    <%= f.radio_button :answer_text, option %>
-    <%= option %>
+<div class="col-xs-<%= answer.question.col_size %>"><div class="form-group">
+  <%= f.label :answer_text, answer.question.question_text, :class => "form-group-title" %>
+  <% if params[:format] == "pdf" %><div class="intructions">Une seule réponse possible</div><% end %>
+  <% if defined?(disabled) && disabled %>
+    <div class="answer_text"><%= answer.answer_text %></div>
+  <% else %>
+    <%- answer.question.options.each do |option| %>
+      <div class="radio">
+        <%= f.label "answer_text_#{option}", option do %>
+          <%= f.radio_button :answer_text, option, :'data-question' => answer.question_id %>
+          <%= option %>
+        <% end %>
+      </div>
+    <% end %>
   <% end %>
-<% end %>
+</div></div>
