@@ -32,7 +32,13 @@ module Rapidfire
     def create
       @answer_group_builder = AnswerGroupBuilder.new(answer_group_params)
       if @answer_group_builder.save
-        redirect_to question_groups_path
+        if !@answer_group_builder.question_group.final_text.blank?
+          redirect_to final_question_group_path(@answer_group_builder.question_group)
+        elsif !@answer_group_builder.question_group.final_link.blank?
+          redirect_to @answer_group_builder.question_group.final_link
+        else
+          redirect_to question_groups_path
+        end
       else
         render :new
       end
@@ -70,7 +76,13 @@ module Rapidfire
         end
       end
       if @answer_group.save
-        redirect_to question_groups_path, :notice  => "Successfully updated."
+        if !@answer_group.question_group.final_text.blank?
+          redirect_to final_question_group_path(@answer_group.question_group)
+        elsif !@answer_group.question_group.final_link.blank?
+          redirect_to @answer_group.question_group.final_link
+        else
+          redirect_to question_groups_path, :notice  => "Successfully updated."
+        end
       else
         render :action => 'edit'
       end

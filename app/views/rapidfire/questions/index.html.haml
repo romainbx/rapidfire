@@ -22,7 +22,7 @@
   Total de points :
   - total = 0
   - @questions.each{|q| total+=q.points if q.points}
-  = total.prettify
+  = total.prettify if total > 0
 %hr
 
 = form_tag update_positions_question_group_path(@question_group), :method => :post do

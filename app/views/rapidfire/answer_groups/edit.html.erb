@@ -1,4 +1,4 @@
-<%= @question_group.header %>
+<%= raw @question_group.header %>
 <hr>
 <%= form_for([@question_group, @answer_group], :html => { :multipart => true }) do |f| %>
   <% @answer_group.question_group.elements.each do |element| %>

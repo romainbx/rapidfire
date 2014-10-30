@@ -28,6 +28,10 @@ module Rapidfire
       end
     end
 
+    def final
+      @question_group = QuestionGroup.find(params[:id])
+    end
+
     def edit
       @question_group = QuestionGroup.find(params[:id])
       respond_with(@question_group)

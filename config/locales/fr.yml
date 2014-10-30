@@ -35,6 +35,14 @@ fr:
         none: Non
 
   activerecord:
+    attributes:
+      rapidfire/question_group:
+        header: En-tête
+        type: Type
+        name: Nom
+        final_text: Texte de dernière page
+        final_link: Redirection finale
+        final_link_help: La redirection finale n'est utilisée que si vous ne spécifiez pas de page finale.
     errors:
       models:
         rapidfire/answer:
