@@ -1,6 +1,6 @@
 require 'active_model_serializers'
 require 'simple_enum'
-require 'wicked_pdf'
+#require 'wicked_pdf'
 require 'paperclip'
 require 'writeexcel'
 require 'axlsx'
