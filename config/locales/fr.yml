@@ -33,8 +33,20 @@ fr:
       clear:
         both: Oui
         none: Non
-
   activerecord:
+    models:
+      rapidfire:
+        questions:
+          date: Date
+          checkbox: Cases
+          datetime: Date et heure
+          long: Chiffre long
+          numeric: Chiffre court
+          radio: Boutons radio
+          select: Liste déroulante
+          short: Texte court
+          email: Email
+          file: Fichier
     attributes:
       rapidfire/question_group:
         header: En-tête

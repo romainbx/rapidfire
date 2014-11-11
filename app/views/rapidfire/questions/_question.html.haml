@@ -8,7 +8,9 @@
         - title = q.question_condition.question_text + " " + q.question_condition_answers
         %i.fa.fa-arrow-circle-right{:"data-toggle"=>"tooltip", :title => title, :style => "cursor:pointer;"}
     = question.question_text
-  %td= t(question.type.to_s.split("::").last.downcase)
+  %td
+    - question_name = question.type.to_s.split("::").last.downcase
+    = t("activerecord.models.rapidfire.questions."+question_name.downcase)
   %td= question.rules[:presence]
   %td= question.show_in_pdf
   - if question.question_group.examen? 

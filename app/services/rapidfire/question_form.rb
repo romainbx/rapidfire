@@ -16,7 +16,7 @@ module Rapidfire
 
     QUESTION_TYPES = AVAILABLE_QUESTIONS.inject({}) do |result, question|
       question_name = question.to_s.split("::").last
-      question_name = I18n.t(question_name.downcase)
+      question_name = I18n.t("activerecord.models.rapidfire.questions."+question_name.downcase)
       result[question_name] = question.to_s
       result
     end
