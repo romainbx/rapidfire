@@ -1,7 +1,6 @@
 <%= render partial: "rapidfire/answers/errors", locals: {answer: answer} %>
 <div class="col-xs-<%= answer.question.col_size %>"><div class="form-group">
   <%= f.label :answer_text, answer.question.question_text, :class => "form-group-title" %>
-  <% if params[:format] == "pdf" %><div class="intructions">Une seule réponse possible</div><% end %>
   <% if defined?(disabled) && disabled %>
     <div class="answer_text"><%= answer.answer_text %></div>
   <% else %>
@@ -14,4 +13,5 @@
       </div>
     <% end %>
   <% end %>
+  <% if params[:format] == "pdf" %><div class="intructions">Une seule réponse possible</div><% end %>
 </div></div>
