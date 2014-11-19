@@ -1,19 +1,16 @@
-.col-xs-12 {
-  width: 33.3333%;
-}
-
 .fieldset {
   margin-bottom:10px;
   clear:both;
   page-break-before: auto;
   page-break-inside: avoid;
+  page-break-after: avoid;
   > .title {
     font-size: 14px;
     font-weight: bold;
     margin: 10px -15px;
     padding: 5px 10px;
     border-color: #000;
-    border-width: 1px 2px 2px 1px;
+    border-width: 3px 2px 2px 1px;
     border-style: solid;
   }
   > .description {
@@ -46,25 +43,32 @@
     margin-bottom:0px;
     font-size:12px;
     display: inline-block;
+    height:60px;
   }
 
   .intructions {
-    margin-top:-5px;
+    margin-top:5px;
     margin-bottom:10px;
     font-size:75%;
     font-style: italic;
     color:#888;
   }
 
+  .radio > label, .checkbox > label {
+    font-size:12px;
+  }
+
   label.radio {
     display:block;
     margin-bottom: 5px;
     padding-left:20px;
+    font-size:12px;
   }
   label.checkbox {
     display:block;
     margin-bottom: 5px;
     padding-left:20px;
+    font-size:12px;
   }
 }
 
