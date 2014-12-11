@@ -18,6 +18,7 @@
       = question.points.prettify if question.points
   %td= question.col_size
   %td= question.clear
+  %td= question.private
   %td.actions
     = link_to [:edit, question.question_group, question], :class => "btn btn-primary btn-xs", :title => t('edit'), :"data-toggle"=>"tooltip" do
       %i.fa.fa-edit

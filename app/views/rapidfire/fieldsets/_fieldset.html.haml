@@ -4,6 +4,8 @@
       %i.fa.fa-arrows
   %td{:colspan => "6", :style => "font-weight:bold;"}
     = fieldset.title
+  %td
+    = fieldset.private
   %td.actions
     = link_to [:edit, fieldset.question_group, fieldset], :class => "btn btn-primary btn-xs", :title => t('edit'), :"data-toggle"=>"tooltip" do
       %i.fa.fa-edit

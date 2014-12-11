@@ -62,6 +62,12 @@
       .form-group
         .checkbox
           %label
+            = f.check_box :private
+            = f.label :private, :class => "form-group-title"
+
+      .form-group
+        .checkbox
+          %label
             = f.check_box :answer_presence
             Obligatoire
 

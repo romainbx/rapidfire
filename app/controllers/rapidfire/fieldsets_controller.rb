@@ -38,7 +38,7 @@ module Rapidfire
 
     private
     def ad_params
-      params.require(:fieldset).permit(:question_group, :title, :title_cn, :description, :position)
+      params.require(:fieldset).permit(:question_group, :title, :title_cn, :description, :position, :private)
     end
 
     def find_question_group!

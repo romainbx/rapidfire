@@ -16,7 +16,7 @@ module Rapidfire
 
     if Rails::VERSION::MAJOR == 3
       attr_accessible :question_group, :question_text, :validation_rules, :answer_options, :right_answers, :points, :show_in_pdf, :question_text_cn
-      attr_accessible :question_condition_id, :question_condition_answers, :col_size, :clear_cd
+      attr_accessible :question_condition_id, :question_condition_answers, :col_size, :clear_cd, :private
     end
 
     def self.inherited(child)

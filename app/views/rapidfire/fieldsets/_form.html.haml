@@ -23,5 +23,9 @@
       .form-group
         = f.label :position, :class => "form-group-title"
         = f.text_field :position, :class => "form-control"
+      .form-group
+        = f.check_box :private
+        = f.label :private, :class => "form-group-title"
+        
   .form-group
     = f.submit t("submit"), :class => "btn btn-primary"

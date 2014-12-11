@@ -26,7 +26,7 @@ module Rapidfire
       :answer_minimum_length, :answer_maximum_length,
       :answer_greater_than_or_equal_to, :answer_less_than_or_equal_to,
       :right_answers, :points, :position, :show_in_pdf, :question_text_cn, 
-      :question_condition_id, :question_condition_answers, :col_size, :clear_cd, :clear
+      :question_condition_id, :question_condition_answers, :col_size, :clear_cd, :clear, :private
 
     delegate :valid?, :errors, :id, :to => :question
 
@@ -70,6 +70,7 @@ module Rapidfire
         :answer_options => answer_options,
         :right_answers   => right_answers,
         :points => points,
+        :private => private,
         :position => position,
         :show_in_pdf => show_in_pdf,
         :question_condition_id => question_condition_id,
@@ -95,6 +96,7 @@ module Rapidfire
       self.right_answers    = question.right_answers
       self.points           = question.points
       self.position         = question.position
+      self.private         = question.private
       self.show_in_pdf      = question.show_in_pdf
       self.col_size         = question.col_size
       self.clear_cd         = question.clear_cd
