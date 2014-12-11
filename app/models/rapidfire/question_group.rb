@@ -10,7 +10,7 @@ module Rapidfire
     as_enum :type, :examen => 1, :formulaire => 0
 
     if Rails::VERSION::MAJOR == 3
-      attr_accessible :name, :type_cd, :type, :header
+      attr_accessible :name, :type_cd, :type, :header, :final_text, :final_link
     end
 
     def elements
