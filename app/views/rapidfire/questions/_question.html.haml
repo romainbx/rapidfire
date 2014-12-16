@@ -13,8 +13,8 @@
     = t("activerecord.models.rapidfire.questions."+question_name.downcase)
   %td= question.rules[:presence]
   %td= question.show_in_pdf
-  - if question.question_group.examen? 
-    %td
+  %td
+    - if question.question_group.examen? 
       = question.points.prettify if question.points
   %td= question.col_size
   %td= question.clear
