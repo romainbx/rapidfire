@@ -55,6 +55,20 @@ fr:
         final_text: Texte de dernière page
         final_link: Redirection finale
         final_link_help: La redirection finale n'est utilisée que si vous ne spécifiez pas de page finale.
+      rapidfire/question:
+        question_text: Texte
+        question_text_cn: Texte en chinois
+        answer_options: Réponses posssibles
+        right_answers: Bonnes réponses
+        question_condition: Question conditionelle
+        question_condition_answers: Réponse conditionnelle
+        col_size: Largeur
+        clear_cd: Aller à la ligne
+        show_in_pdf: Afficher dans le PDF
+        private: Visible seulement par les administrateurs
+        position: Position
+        type: Type
+        points: Points
     errors:
       models:
         rapidfire/answer:

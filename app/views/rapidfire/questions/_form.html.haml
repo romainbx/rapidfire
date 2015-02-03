@@ -1,8 +1,3 @@
-%h1
-  Question
-
-%hr
-
 = form_for [@question_group, question], :html => {:class => "form-horizontal"} do |f|
   - unless question.errors.empty?
     %ul
