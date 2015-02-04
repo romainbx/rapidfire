@@ -1,5 +1,6 @@
-<%= raw @question_group.header %>
-<hr>
+<div class="survey-header">
+  <%= raw @question_group.header %>
+</div>
 <%= form_for([@question_group, @answer_group], :html => { :multipart => true }) do |f| %>
   <% @answer_group.question_group.elements.each do |element| %>
     <% if element.class == Rapidfire::Fieldset %>
